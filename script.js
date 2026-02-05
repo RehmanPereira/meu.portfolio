@@ -168,3 +168,38 @@ function updateVisitDisplay() {
     
     console.log(`📊 Visitas: ${count}`);
 }
+
+// 4. Função para formatar data
+function formatLastVisit() {
+    const lastVisitISO = localStorage.getItem('lastVisit');
+    
+    if (!lastVisitISO) {
+        return 'Primeira vez aqui! 🎉';
+    }
+    
+    const lastVisit = new Date(lastVisitISO);
+    const now = new Date();
+    
+    // Calcular diferença em milissegundos
+    const diff = now - lastVisit;
+    
+    // Converter para minutos/horas/dias
+    const minutes = Math.floor(diff / 1000 / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    
+    if (minutes < 1) return 'Há menos de 1 minuto';
+    if (minutes < 60) return `Há ${minutes} minuto${minutes > 1 ? 's' : ''}`;
+    if (hours < 24) return `Há ${hours} hora${hours > 1 ? 's' : ''}`;
+    return `Há ${days} dia${days > 1 ? 's' : ''}`;
+}
+
+// 5. Atualizar display da última visita
+function updateLastVisitDisplay() {
+    const lastVisitText = formatLastVisit();
+    
+    const lastVisitElement = document.getElementById('last-visit');
+    if (lastVisitElement) {
+        lastVisitElement.textContent = lastVisitText;
+    }
+}
