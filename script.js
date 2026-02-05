@@ -26,3 +26,21 @@ const themeToggle = document.getElementById('theme-toggle');
 if (themeToggle) {
     themeToggle.addEventListener('click', toggleTheme);
 }
+
+// 3. Carregar tema guardado ao iniciar
+function loadSavedTheme() {
+    // Buscar tema do localStorage
+    const savedTheme = localStorage.getItem('theme');
+    
+    // Se tiver tema guardado como 'dark', ativa dark mode
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+    
+    console.log(`Tema carregado: ${savedTheme || 'padrão (light)'}`);
+}
+
+// 4. Executar quando página carrega
+document.addEventListener('DOMContentLoaded', () => {
+    loadSavedTheme();
+});
