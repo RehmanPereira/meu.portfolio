@@ -93,3 +93,36 @@ function startClock() {
 document.addEventListener('DOMContentLoaded', () => {
     startClock();
 });
+
+// 5. Função para alternar formato
+function toggleFormat() {
+    is24Hour = !is24Hour;
+    
+    // Guardar preferência
+    localStorage.setItem('clockFormat', is24Hour ? '24' : '12');
+    
+    // Atualizar imediatamente
+    updateClock();
+    
+    console.log(`Formato: ${is24Hour ? '24h' : '12h'}`);
+}
+
+// 6. Event listener no botão
+const formatToggle = document.getElementById('format-toggle');
+if (formatToggle) {
+    formatToggle.addEventListener('click', toggleFormat);
+}
+
+// 7. Carregar formato guardado
+function loadClockFormat() {
+    const saved = localStorage.getItem('clockFormat');
+    if (saved) {
+        is24Hour = (saved === '24');
+    }
+}
+
+// Adicionar ao DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    loadClockFormat();
+    startClock();
+});
