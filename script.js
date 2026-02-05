@@ -221,3 +221,30 @@ document.addEventListener('DOMContentLoaded', () => {
     initVisitCounter();
     // ... outras inicializações
 });
+
+// 8. Função para resetar contador
+function resetVisitCounter() {
+    // Confirmar com utilizador
+    const confirm = window.confirm('Tens a certeza que queres resetar o contador?');
+    
+    if (confirm) {
+        // Limpar localStorage
+        localStorage.removeItem('visitCount');
+        localStorage.removeItem('lastVisit');
+        
+        // Atualizar displays
+        updateVisitDisplay();
+        updateLastVisitDisplay();
+        
+        console.log('🔄 Contador resetado!');
+        
+        // Feedback visual
+        alert('Contador resetado com sucesso!');
+    }
+}
+
+// 9. Event listener no botão
+const resetBtn = document.getElementById('reset-counter');
+if (resetBtn) {
+    resetBtn.addEventListener('click', resetVisitCounter);
+}
