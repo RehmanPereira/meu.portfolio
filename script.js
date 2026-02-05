@@ -74,3 +74,22 @@ function updateClock() {
     document.getElementById('minutes').textContent = minutes;
     document.getElementById('seconds').textContent = seconds;
 }
+
+// 2. Variável para guardar o intervalo
+let clockInterval;
+
+// 3. Função para iniciar o relógio
+function startClock() {
+    // Atualizar imediatamente
+    updateClock();
+    
+    // Atualizar a cada 1000ms (1 segundo)
+    clockInterval = setInterval(updateClock, 1000);
+    
+    console.log('⏰ Relógio iniciado!');
+}
+
+// 4. Iniciar quando página carrega
+document.addEventListener('DOMContentLoaded', () => {
+    startClock();
+});
