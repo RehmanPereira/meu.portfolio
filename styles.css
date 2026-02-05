@@ -7,26 +7,40 @@
 
 /* ===== VARIABLES (TEMA CLARO - padrão) ===== */
 :root {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f3f4f6;
-    --text-primary: #1f2937;
-    --text-secondary: #6b7280;
-    --accent: #6366f1;
-    --accent-2: #8b5cf6;   /* para o gradient do hero */
-    --border: #e5e7eb;
+    /* Paleta Light */
+    --bg-primary: #59FFA0;
+    --bg-secondary: #E4B7E5;
+
+    /* Texto (usei um tom bem contrastante para legibilidade) */
+    --text-primary: #160040;
+    --text-secondary: #7E5A9B;
+
+    /* Acentos */
+    --accent: #9A48D0;
+    --accent-2: #B288C0;
+
+    /* Bordas */
+    --border: #B288C055;
 
     --spacing: 1rem;
 }
 
 /* ===== TEMA ESCURO ===== */
 body.dark-mode {
-    --bg-primary: #1f2937;
-    --bg-secondary: #111827;
-    --text-primary: #f9fafb;
-    --text-secondary: #d1d5db;
-    --accent: #818cf8;
-    --accent-2: #a78bfa;   /* opcional: um 2º accent no dark */
-    --border: #374151;
+    /* Paleta Dark */
+    --bg-primary: #000000;
+    --bg-secondary: #160040;
+
+    /* Texto */
+    --text-primary: #FFFFFF;
+    --text-secondary: #9A0680;
+
+    /* Acentos */
+    --accent: #79018C;
+    --accent-2: #4C0070;
+
+    /* Bordas */
+    --border: #79018C55;
 }
 
 /* ===== BASE STYLES ===== */
@@ -77,7 +91,7 @@ nav a:hover {
 /* ===== HERO SECTION ===== */
 .hero {
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-    color: #ffffff; /* mantém legibilidade no gradient */
+    color: #ffffff;
     text-align: center;
     padding: 4rem var(--spacing);
     min-height: 60vh;
@@ -151,6 +165,7 @@ footer {
     }
 }
 
+/* ===== CLOCK ===== */
 .clock-container {
     display: flex;
     flex-direction: column;
@@ -166,8 +181,9 @@ footer {
     background: var(--bg-secondary);
     padding: 1.5rem 3rem;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     letter-spacing: 0.1em;
+    border: 1px solid var(--border);
 }
 
 .clock span {
@@ -184,21 +200,23 @@ footer {
     border-radius: 25px;
     cursor: pointer;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .format-toggle:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
 }
 
+/* ===== VISIT COUNTER ===== */
 .visit-counter {
     background: var(--bg-secondary);
     padding: 2rem;
     border-radius: 15px;
     margin: 2rem 0;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border);
 }
 
 .visit-counter p {
@@ -216,6 +234,7 @@ footer {
     font-size: 0.9em;
 }
 
+/* ===== RESET BUTTON ===== */
 .reset-btn {
     margin-top: 1rem;
     background: #ef4444;
@@ -225,10 +244,10 @@ footer {
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .reset-btn:hover {
-    background: #dc2626;
+    filter: brightness(0.95);
     transform: translateY(-2px);
 }
