@@ -126,3 +126,45 @@ document.addEventListener('DOMContentLoaded', () => {
     loadClockFormat();
     startClock();
 });
+
+// ===== CONTADOR DE VISITAS =====
+
+// 1. Função para obter contagem atual
+function getVisitCount() {
+    // Buscar do localStorage (retorna string ou null)
+    const count = localStorage.getItem('visitCount');
+    
+    // Converter para número (ou 0 se não existir)
+    return count ? parseInt(count) : 0;
+}
+
+// 2. Função para incrementar visitas
+function incrementVisitCount() {
+    // Obter contagem atual
+    let count = getVisitCount();
+    
+    // Incrementar
+    count++;
+    
+    // Guardar nova contagem
+    localStorage.setItem('visitCount', count);
+    
+    // Guardar timestamp da visita
+    const now = new Date().toISOString();
+    localStorage.setItem('lastVisit', now);
+    
+    return count;
+}
+
+// 3. Função para atualizar o display
+function updateVisitDisplay() {
+    const count = getVisitCount();
+    
+    // Atualizar número
+    const countElement = document.getElementById('visit-count');
+    if (countElement) {
+        countElement.textContent = count;
+    }
+    
+    console.log(`📊 Visitas: ${count}`);
+}
