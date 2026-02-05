@@ -203,3 +203,21 @@ function updateLastVisitDisplay() {
         lastVisitElement.textContent = lastVisitText;
     }
 }
+
+// 6. Função para inicializar o contador
+function initVisitCounter() {
+    // Incrementar visitas
+    incrementVisitCount();
+    
+    // Atualizar displays
+    updateVisitDisplay();
+    updateLastVisitDisplay();
+    
+    console.log('📊 Contador de visitas inicializado!');
+}
+
+// 7. Executar quando página carrega
+document.addEventListener('DOMContentLoaded', () => {
+    initVisitCounter();
+    // ... outras inicializações
+});
