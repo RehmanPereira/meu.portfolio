@@ -485,11 +485,3 @@ function renderProjects(projectsToRender) {
         updateCounters();
     }, existingCards.length * 50 + 300);
 }
-
-// CSS adicional
-@keyframes fadeOut {
-    to {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-}
