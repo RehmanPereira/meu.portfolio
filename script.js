@@ -257,7 +257,7 @@ const projects = [
         title: 'E-commerce Website',
         category: 'web',
         description: 'Loja online completa com carrinho de compras',
-        image: 'https://via.placeholder.com/400x300/6366f1/ffffff?text=E-commerce',
+        image: 'imagens/gato.jpg',
         tags: ['HTML', 'CSS', 'JavaScript', 'API'],
         link: 'https://github.com/...',
         longDescription: 'Website de e-commerce completo com sistema de carrinho, checkout, e integração com API de pagamentos. Interface moderna e responsiva.',
