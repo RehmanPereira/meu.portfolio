@@ -248,3 +248,89 @@ const resetBtn = document.getElementById('reset-counter');
 if (resetBtn) {
     resetBtn.addEventListener('click', resetVisitCounter);
 }
+
+// ===== DADOS DOS PROJETOS =====
+
+const projects = [
+    {
+        id: 1,
+        title: 'E-commerce Website',
+        category: 'web',
+        description: 'Loja online completa com carrinho de compras',
+        image: 'https://via.placeholder.com/400x300/6366f1/ffffff?text=E-commerce',
+        tags: ['HTML', 'CSS', 'JavaScript', 'API'],
+        link: 'https://github.com/...',
+        longDescription: 'Website de e-commerce completo com sistema de carrinho, checkout, e integração com API de pagamentos. Interface moderna e responsiva.',
+        features: ['Carrinho de compras', 'Sistema de pagamento', 'Área de utilizador', 'Gestão de produtos'],
+        technologies: ['HTML5', 'CSS3', 'JavaScript ES6+', 'LocalStorage', 'Fetch API'],
+        date: '2025-01'
+    },
+    {
+        id: 2,
+        title: 'App de Tarefas',
+        category: 'web',
+        description: 'Gestor de tarefas com filtros e categorias',
+        image: 'https://via.placeholder.com/400x300/8b5cf6/ffffff?text=Todo+App',
+        tags: ['React', 'CSS', 'LocalStorage'],
+        link: 'https://github.com/...',
+        longDescription: 'Aplicação de gestão de tarefas com sistema de prioridades, categorias e persistência local.',
+        features: ['Adicionar/editar/remover tarefas', 'Filtros por estado', 'Categorias', 'Persistência de dados'],
+        technologies: ['HTML5', 'CSS3', 'JavaScript', 'LocalStorage'],
+        date: '2024-12'
+    },
+    {
+        id: 3,
+        title: 'Portfolio Designer',
+        category: 'design',
+        description: 'Portfolio criativo para designer gráfico',
+        image: 'https://via.placeholder.com/400x300/10b981/ffffff?text=Portfolio',
+        tags: ['Figma', 'UI/UX', 'Protótipo'],
+        link: 'https://figma.com/...',
+        longDescription: 'Design de portfolio minimalista e elegante para apresentar trabalhos criativos.',
+        features: ['Design responsivo', 'Animações suaves', 'Galeria de trabalhos', 'Formulário de contacto'],
+        technologies: ['Figma', 'Design System', 'Prototyping'],
+        date: '2024-11'
+    },
+    {
+        id: 4,
+        title: 'App Meteorologia',
+        category: 'mobile',
+        description: 'App mobile para consultar previsão do tempo',
+        image: 'https://via.placeholder.com/400x300/f59e0b/ffffff?text=Weather+App',
+        tags: ['React Native', 'API', 'Mobile'],
+        link: 'https://github.com/...',
+        longDescription: 'Aplicação mobile para consultar previsão meteorológica com dados em tempo real.',
+        features: ['Previsão 7 dias', 'Localização automática', 'Alertas meteorológicos', 'Favoritos'],
+        technologies: ['React Native', 'Weather API', 'Geolocation'],
+        date: '2025-01'
+    },
+    {
+        id: 5,
+        title: 'Dashboard Analytics',
+        category: 'web',
+        description: 'Dashboard com gráficos e estatísticas',
+        image: 'https://via.placeholder.com/400x300/ef4444/ffffff?text=Dashboard',
+        tags: ['Vue.js', 'Charts', 'API'],
+        link: 'https://github.com/...',
+        longDescription: 'Dashboard interativo para visualização de dados e analytics com gráficos dinâmicos.',
+        features: ['Gráficos interativos', 'Filtros de data', 'Exportar relatórios', 'Tempo real'],
+        technologies: ['HTML5', 'CSS3', 'JavaScript', 'Chart.js', 'API'],
+        date: '2024-10'
+    },
+    {
+        id: 6,
+        title: 'Redesign Logo Empresa',
+        category: 'design',
+        description: 'Redesign de identidade visual corporativa',
+        image: 'https://via.placeholder.com/400x300/ec4899/ffffff?text=Logo+Design',
+        tags: ['Illustrator', 'Branding', 'Logo'],
+        link: 'https://behance.net/...',
+        longDescription: 'Projeto de redesign completo de identidade visual incluindo logo, cores e tipografia.',
+        features: ['Logo principal', 'Variações', 'Manual de marca', 'Mockups'],
+        technologies: ['Adobe Illustrator', 'Photoshop', 'InDesign'],
+        date: '2024-09'
+    }
+];
+
+// Variável global para controlar filtro atual
+let currentCategory = 'all';
