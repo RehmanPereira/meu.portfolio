@@ -403,3 +403,23 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProjects(projects);
     console.log('✅ Projetos renderizados!');
 });
+
+// ===== SISTEMA DE FILTROS =====
+
+function filterProjects(category) {
+    // Guardar categoria atual
+    currentCategory = category;
+    
+    let filteredProjects;
+    
+    if (category === 'all') {
+        filteredProjects = projects;
+    } else {
+        filteredProjects = projects.filter(project => project.category === category);
+    }
+    
+    // Re-renderizar com projetos filtrados
+    renderProjects(filteredProjects);
+    
+    console.log(`Filtro aplicado: ${category} (${filteredProjects.length} projetos)`);
+}
