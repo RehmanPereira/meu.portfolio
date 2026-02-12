@@ -547,3 +547,38 @@ function closeModal() {
     
     console.log('Modal fechado');
 }
+
+// ===== SISTEMA DE PESQUISA =====
+
+function searchProjects(query) {
+    // Converter query para lowercase
+    const searchTerm = query.toLowerCase().trim();
+    
+    // Se pesquisa vazia, mostrar todos (respeitando filtro categoria)
+    if (searchTerm === '') {
+        filterProjects(currentCategory);
+        return;
+    }
+    
+    // Começar com projetos da categoria atual
+    let baseProjects = currentCategory === 'all' 
+        ? projects 
+        : projects.filter(p => p.category === currentCategory);
+    
+    // Filtrar por termo de pesquisa
+    const results = baseProjects.filter(project => {
+        // Procurar em múltiplos campos
+        const titleMatch = project.title.toLowerCase().includes(searchTerm);
+        const descMatch = project.description.toLowerCase().includes(searchTerm);
+        const tagsMatch = project.tags.some(tag => 
+            tag.toLowerCase().includes(searchTerm)
+        );
+        
+        return titleMatch || descMatch || tagsMatch;
+    });
+    
+    // Renderizar resultados
+    renderProjects(results);
+    
+    console.log(`Pesquisa: "${query}" - ${results.length} resultados`);
+}
