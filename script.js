@@ -548,6 +548,47 @@ function closeModal() {
     console.log('Modal fechado');
 }
 
+// ===== EVENT LISTENERS DO MODAL =====
+
+function setupModalListeners() {
+    // Event Delegation nos cards
+    const grid = document.getElementById('projects-grid');
+    grid.addEventListener('click', (e) => {
+        const card = e.target.closest('.project-card');
+        if (card) {
+            const projectId = parseInt(card.dataset.id);
+            openModal(projectId);
+        }
+    });
+    
+    // Fechar modal ao clicar no X
+    const closeBtn = document.querySelector('.modal-close');
+    closeBtn.addEventListener('click', closeModal);
+    
+    // Fechar modal ao clicar fora (no overlay)
+    const modal = document.getElementById('project-modal');
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Fechar modal com tecla Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+}
+
+// Adicionar ao DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    renderProjects(projects);
+    setupFilterListeners();
+    setupModalListeners();  // ADICIONAR ESTA LINHA
+    console.log('✅ Modal configurado!');
+});
+
 // ===== SISTEMA DE PESQUISA =====
 
 function searchProjects(query) {
