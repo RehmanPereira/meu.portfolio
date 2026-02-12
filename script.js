@@ -643,3 +643,23 @@ function setupSearchListener() {
         }
     });
 }
+
+// Quando mudar filtro, limpar pesquisa
+function filterProjects(category) {
+    currentCategory = category;
+    
+    // Limpar input de pesquisa
+    const searchInput = document.getElementById('search-input');
+    searchInput.value = '';
+    
+    let filteredProjects;
+    
+    if (category === 'all') {
+        filteredProjects = projects;
+    } else {
+        filteredProjects = projects.filter(project => project.category === category);
+    }
+    
+    renderProjects(filteredProjects);
+    console.log(`Filtro aplicado: ${category} (${filteredProjects.length} projetos)`);
+}
