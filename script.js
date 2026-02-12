@@ -334,3 +334,72 @@ const projects = [
 
 // Variável global para controlar filtro atual
 let currentCategory = 'all';
+
+// ===== RENDERIZAR PROJETOS =====
+
+function renderProjects(projectsToRender) {
+    const grid = document.getElementById('projects-grid');
+    const noResults = document.getElementById('no-results');
+    
+    // Limpar grid
+    grid.innerHTML = '';
+    
+    // Se não há projetos, mostrar mensagem
+    if (projectsToRender.length === 0) {
+        noResults.style.display = 'block';
+        return;
+    }
+    
+    noResults.style.display = 'none';
+    
+    // Criar card para cada projeto
+    projectsToRender.forEach(project => {
+        const card = createProjectCard(project);
+        grid.appendChild(card);
+    });
+    
+    // Atualizar contadores
+    updateCounters();
+}
+
+// Criar HTML de um card
+function createProjectCard(project) {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.dataset.id = project.id;
+    card.dataset.category = project.category;
+    
+    // Template string com HTML do card
+    card.innerHTML = `
+        <img src="${project.image}" alt="${project.title}">
+        <div class="project-card-body">
+            <span class="project-category">${project.category}</span>
+            <h3>${project.title}</h3>
+            <p class="project-description">${project.description}</p>
+            <div class="project-tags">
+                ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+        </div>
+    `;
+    
+    return card;
+}
+
+// Atualizar números nos botões de filtro
+function updateCounters() {
+    const allCount = projects.length;
+    const webCount = projects.filter(p => p.category === 'web').length;
+    const mobileCount = projects.filter(p => p.category === 'mobile').length;
+    const designCount = projects.filter(p => p.category === 'design').length;
+    
+    document.querySelector('[data-category="all"] .count').textContent = allCount;
+    document.querySelector('[data-category="web"] .count').textContent = webCount;
+    document.querySelector('[data-category="mobile"] .count').textContent = mobileCount;
+    document.querySelector('[data-category="design"] .count').textContent = designCount;
+}
+
+// Inicializar ao carregar página
+document.addEventListener('DOMContentLoaded', () => {
+    renderProjects(projects);
+    console.log('✅ Projetos renderizados!');
+});
