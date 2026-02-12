@@ -423,32 +423,27 @@ function filterProjects(category) {
     
     console.log(`Filtro aplicado: ${category} (${filteredProjects.length} projetos)`);
 }
-
-// ===== EVENT LISTENERS PARA FILTROS =====
-
-function setupFilterListeners() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Remover active de todos
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Adicionar active ao clicado
-            button.classList.add('active');
-            
-            // Obter categoria do data attribute
-            const category = button.dataset.category;
-            
-            // Filtrar projetos
-            filterProjects(category);
-        });
-    });
+/* Animação ao renderizar cards */
+.project-card {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
 }
 
-// Adicionar ao DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-    renderProjects(projects);
-    setupFilterListeners();  // ADICIONAR ESTA LINHA
-    console.log('✅ Filtros configurados!');
-});
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Delay progressivo para cada card */
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
