@@ -582,3 +582,33 @@ function searchProjects(query) {
     
     console.log(`Pesquisa: "${query}" - ${results.length} resultados`);
 }
+
+// ===== EVENT LISTENER PARA PESQUISA =====
+
+function setupSearchListener() {
+    const searchInput = document.getElementById('search-input');
+    
+    // Event 'input' dispara a cada tecla pressionada
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value;
+        searchProjects(query);
+    });
+    
+    // Limpar pesquisa com Escape
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            searchInput.value = '';
+            searchProjects('');
+            searchInput.blur();
+        }
+    });
+}
+
+// Adicionar ao DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    renderProjects(projects);
+    setupFilterListeners();
+    setupModalListeners();
+    setupSearchListener();  // ADICIONAR ESTA LINHA
+    console.log('✅ Pesquisa configurada!');
+});
