@@ -452,3 +452,44 @@ document.addEventListener('DOMContentLoaded', () => {
     setupFilterListeners();  // ADICIONAR ESTA LINHA
     console.log('✅ Filtros configurados!');
 });
+
+// Versão com animação de saída
+function renderProjects(projectsToRender) {
+    const grid = document.getElementById('projects-grid');
+    const noResults = document.getElementById('no-results');
+    
+    // Fade out dos cards existentes
+    const existingCards = grid.querySelectorAll('.project-card');
+    existingCards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.animation = 'fadeOut 0.3s ease forwards';
+        }, index * 50);
+    });
+    
+    // Esperar animação terminar antes de limpar
+    setTimeout(() => {
+        grid.innerHTML = '';
+        
+        if (projectsToRender.length === 0) {
+            noResults.style.display = 'block';
+            return;
+        }
+        
+        noResults.style.display = 'none';
+        
+        projectsToRender.forEach(project => {
+            const card = createProjectCard(project);
+            grid.appendChild(card);
+        });
+        
+        updateCounters();
+    }, existingCards.length * 50 + 300);
+}
+
+// CSS adicional
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
