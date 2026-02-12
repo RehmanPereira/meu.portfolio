@@ -612,3 +612,34 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSearchListener();  // ADICIONAR ESTA LINHA
     console.log('✅ Pesquisa configurada!');
 });
+
+// ===== DEBOUNCE PARA PESQUISA =====
+
+function debounce(func, delay) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+// Criar versão debounced da pesquisa
+const debouncedSearch = debounce(searchProjects, 300);
+
+function setupSearchListener() {
+    const searchInput = document.getElementById('search-input');
+    
+    // Usar versão debounced
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value;
+        debouncedSearch(query);
+    });
+    
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            searchInput.value = '';
+            searchProjects('');
+            searchInput.blur();
+        }
+    });
+}
