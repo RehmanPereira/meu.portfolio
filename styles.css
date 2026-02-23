@@ -19,6 +19,20 @@
     --border: #9A48D044;
 
     --spacing: 1rem;
+
+    /* ===== ALIASES p/ componentes (o teu CSS usa estas vars) ===== */
+    --primary: var(--accent);
+    --secondary: var(--accent-2);
+    --gray: var(--text-secondary);
+    --light: var(--bg-primary);
+    --dark: var(--text-primary);
+
+    --danger: #ef4444;
+    --success: #22c55e;
+
+    /* ===== FOOTER tokens ===== */
+    --footer-bg: var(--text-primary);
+    --footer-text: var(--bg-secondary);
 }
 
 /* ===== TEMA ESCURO ===== */
@@ -37,6 +51,17 @@ body.dark-mode {
 
     /* Bordas */
     --border: #79018C55;
+
+    /* Aliases (seguem as vars acima, mas deixo explícito p/ clareza) */
+    --primary: var(--accent);
+    --secondary: var(--accent-2);
+    --gray: var(--text-secondary);
+    --light: var(--bg-secondary);
+    --dark: var(--text-primary);
+
+    /* Footer no dark: fundo roxo escuro, texto branco */
+    --footer-bg: var(--bg-secondary);
+    --footer-text: #ffffff;
 }
 
 /* ===== BASE STYLES ===== */
@@ -171,8 +196,8 @@ body.dark-mode .icon-light {
 
 /* ===== FOOTER ===== */
 footer {
-    background: var(--text-primary);
-    color: var(--bg-primary);
+    background: var(--footer-bg);
+    color: var(--footer-text);
     text-align: center;
     padding: 2rem var(--spacing);
 }
@@ -354,9 +379,10 @@ footer {
     margin-top: 30px;
 }
 
-/* Card de Projeto */
+/* Card de Projeto (override final - agora compatível com tema) */
 .project-card {
-    background: #F9F9ED;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -377,10 +403,11 @@ footer {
 
 .project-card-body {
     padding: 20px;
+    color: var(--text-primary);
 }
 
 .project-card-body h3 {
-    color: var(--primary);
+    color: var(--text-primary);
     margin-bottom: 10px;
 }
 
@@ -395,7 +422,7 @@ footer {
 }
 
 .project-description {
-    color: var(--gray);
+    color: var(--text-primary);
     margin-bottom: 15px;
 }
 
@@ -440,7 +467,8 @@ footer {
 }
 
 .modal-content {
-    background: #F9F9ED;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
     padding: 30px;
     border-radius: 20px;
     max-width: 800px;
@@ -488,7 +516,6 @@ footer {
 .project-card:nth-child(5) { animation-delay: 0.5s; }
 .project-card:nth-child(6) { animation-delay: 0.6s; }
 
-
 @keyframes fadeOut {
     to {
         opacity: 0;
@@ -516,9 +543,10 @@ footer {
     justify-content: center;
 }
 
-/* Modal Content */
+/* Modal Content (override final - compatível com tema) */
 .modal-content {
-    background: white;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
     padding: 40px;
     border-radius: 20px;
     max-width: 800px;
