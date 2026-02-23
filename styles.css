@@ -39,15 +39,15 @@
 body.dark-mode {
     /* Paleta Dark */
     --bg-primary: #000000;
-    --bg-secondary: #160040;
+    --bg-secondary: #3F0071;
 
     /* Texto */
-    --text-primary: #FFFFFF;
-    --text-secondary: #9A0680;
+    --text-primary: #610094;
+    --text-secondary: #150050;
 
     /* Acentos */
-    --accent: #79018C;
-    --accent-2: #4C0070;
+    --accent: #150050;
+    --accent-2: #3F0071;
 
     /* Bordas */
     --border: #79018C55;
