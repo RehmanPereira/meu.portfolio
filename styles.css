@@ -38,16 +38,16 @@
 /* ===== TEMA ESCURO ===== */
 body.dark-mode {
     /* Paleta Dark */
-    --bg-primary: #000000;
-    --bg-secondary: #3F0071;
+    --bg-primary: #140126;
+    --bg-secondary: #351C59;
 
     /* Texto */
-    --text-primary: #F9F9ED;
-    --text-secondary: #F9F9ED;
+    --text-primary: #A7B2F2;
+    --text-secondary: #A7B2F2;
 
     /* Acentos */
-    --accent: #150050;
-    --accent-2: #3F0071;
+    --accent: #846CD9;
+    --accent-2: #6A4EA6;
 
     /* Bordas */
     --border: #79018C55;
