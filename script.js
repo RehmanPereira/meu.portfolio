@@ -337,7 +337,7 @@ const projects = [
         description: 'Apresentação',
         image: 'imagens/segurancads.jpg',
         tags: ['Tech', 'Web', 'Canva'],
-        link: 'https://www.canva.com/design/DAGzJtRFPcA/CkXSRLlC0Lz5DYrNA0H6Rw/edit?utm_content=DAGzJtRFPcA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton',
+        link: 'https://www.canva.com/design/DAGzJtRFPcA/wyoU4RmJ9JIx9N1qhVVfWQ/view?utm_content=DAGzJtRFPcA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5c14e1e449',
         longDescription: 'Apresentação sobre a "Segurança no Desenvolvimento de Software"',
         features: ['Aprendizado', 'Prático', 'Exemplos', 'Dicas de Segurança' ],
         technologies: ['ChatGpt', 'Canva'],
@@ -355,6 +355,19 @@ const projects = [
         features: ['Musicas', 'Recomendações' ],
         technologies: ['Pinterest', 'Music players'],
         date: '2024-12'
+    },
+    {
+        id: 9,
+        title: 'EDD',
+        category: 'presentation',
+        description: 'Apresentação',
+        image: 'imagens/Edd.jpg',
+        tags: ['Tech', 'Web', 'Canva'],
+        link: 'https://www.canva.com/design/DAGljswWMVI/eMyHjhnl0bXN1OQmHXqwpw/view?utm_content=DAGljswWMVI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h178e982ccd',
+        longDescription: 'Apresentação sobre os "EDDs"',
+        features: ['Musicas', 'Recomendações' ],
+        technologies: ['Aprendizado', 'Prático'],
+        date: '2025-4'
     }
 ];
 
