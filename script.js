@@ -336,12 +336,25 @@ const projects = [
         category: 'presentation',
         description: 'Apresentação',
         image: 'imagens/segurancads.jpg',
-        tags: ['Teach', 'Web', 'Canva'],
+        tags: ['Tech', 'Web', 'Canva'],
         link: 'https://www.canva.com/design/DAGzJtRFPcA/CkXSRLlC0Lz5DYrNA0H6Rw/edit?utm_content=DAGzJtRFPcA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton',
         longDescription: 'Apresentação sobre a "Segurança no Desenvolvimento de Software"',
         features: ['Aprendizado', 'Prático', 'Exemplos', 'Dicas de Segurança' ],
         technologies: ['ChatGpt', 'Canva'],
         date: '2026-02'
+    },
+    {
+        id: 8,
+        title: 'Meu primeiro Website',
+        category: 'web',
+        description: 'Website',
+        image: 'imagens/katseyef.jpg',
+        tags: ['Tech', 'Web', 'Music'],
+        link: 'tic%20html/inicio.html',
+        longDescription: 'Website sobre o grupo pop "Katseye"',
+        features: ['Musicas', 'Recomendações' ],
+        technologies: ['Pinterest', 'Music players'],
+        date: '2024-12'
     }
 ];
 

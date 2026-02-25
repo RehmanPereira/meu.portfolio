@@ -1,0 +1,115 @@
+<html>
+  <meta charset="UTF-8">
+  <title>Inicio</title>
+	<style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #2c1d4d;
+    }
+
+    h1, h2, h3 {
+      color: white;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #1f0f39;
+      padding: 10px 0;
+    }
+
+    ul.menu {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+
+    ul.menu li {
+      margin: 0 15px;
+      display: block;
+      border: 2px solid white;
+      border-radius: 5px;
+    }
+
+    ul.menu li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      display: block;
+    }
+
+    ul.menu li a:hover {
+      background-color: #1f0f39;
+      border-radius: 5px;
+    }
+
+    table {
+      font-family: Arial, sans-serif;
+      border-collapse: collapse;
+      width: 30%;
+      margin: 0 auto;
+      background-color: #fff;
+    }
+
+    td, th {
+      border: 1px solid #000000;
+      text-align: center;
+      padding: 8px;
+    }
+
+	.img-container img {
+		display: inline-block;
+		width: 200px;
+		margin-right: 10px;
+	}
+	
+	script{
+		text-align: center;
+		color: white;
+	}
+	
+	footer {
+	background-color: #1f0f39;
+	padding: 10px;
+	text-align: center;
+	color: white;
+	}
+	
+  </style>
+	<body>
+	  <nav>
+    <ul class="menu">
+      <li><a href="C:\Users\escola\Desktop\tic html\inicio.html">Início</a></li>
+      <li><a href="C:\Users\escola\Desktop\tic html\O que são.html">O que são?</a></li>
+      <li><a href="C:\Users\escola\Desktop\tic html\membros e empresa.html">Membros/Empresa</a></li>
+	  <li><a href="C:\Users\escola\Desktop\tic html\Albuns.html">Álbuns</a></li>
+    </ul>
+  </nav>
+  <h1>Bem vindo</h1>
+	<h2>a um site sobre o Katseye! </h2>
+	<p align=center>
+	<button type="button" onclick="katseye(1)">Logo</button>
+	<button type="button" onclick="katseye(0)">Grupo</button>
+	</p>
+	<p align=center>
+	<img id="myImage" src="teste.jpg">
+	</p>
+	<p align=center>
+	<script>
+	function katseye(sw) {
+	var pic;
+	if (sw == 0) {
+    pic = "katseyeinicioimg.jpg"
+	} else {
+    pic = "teste.jpg"
+	}
+	document.getElementById('myImage').src = pic;
+	}
+	</script>
+	<footer>
+	<p>Rehman Pereira | PI-24 | Site para TIC.</p>
+	</footer>
+	</body>
+</html>
