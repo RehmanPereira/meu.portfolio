@@ -711,28 +711,43 @@ footer {
     75% { transform: translateX(10px); }
 }
 
-.digitando {
+/* Base (aplica aos dois) */
+.digitando{
   font-family: 'comic sans', cursive, sans-serif;
+  display: inline-block;
   overflow: hidden;
-  border-right: .15em solid red;
   white-space: nowrap;
-  margin: 0 auto;
-  letter-spacing: .15em;
-
-  animation:
-    typing 0.5s steps(100, end) forwards,
-    blink-caret .75s step-end 4; /* pisca só 4 vezes */
+  border-right: .15em solid red;
 }
 
-/* Animação do texto */
-@keyframes typing {
-  from { width: 0 }
-  to { width: 10ch; }
+/* Frase 1: "Olá! Sou o Rehman 👋"  -> 19 chars */
+.titulo{
+  width: 0;
+  animation:
+    typing1 1.5s steps(19, end) forwards,
+    blink-caret 1.5s step-end forwards;
+}
+
+@keyframes typing1{
+  from { width: 0; }
+  to   { width: 19ch; }
+}
+
+/* Frase 2: "Desenvolvedor Web | Estudante | Criativo" -> 41 chars */
+.subtitulo{
+  width: 0;
+  animation:
+    typing2 2.5s steps(41, end) forwards,
+    blink-caret 2.5s step-end forwards;
+}
+
+@keyframes typing2{
+  from { width: 0; }
+  to   { width: 41ch; }
 }
 
 /* Cursor pisca e termina invisível */
-@keyframes blink-caret {
-  0% { border-color: transparent; }
-  50% { border-color: red; }
-  100% { border-color: transparent; }
+@keyframes blink-caret{
+  0%, 100% { border-color: transparent; }
+  50%      { border-color: red; }
 }
