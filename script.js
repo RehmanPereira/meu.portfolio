@@ -745,3 +745,21 @@ function filterProjects(category) {
     renderProjects(filteredProjects);
     console.log(`Filtro aplicado: ${category} (${filteredProjects.length} projetos)`);
 }
+
+// Mostrar botão quando scroll > 300px
+window.addEventListener('scroll', () => {
+    const btn = document.getElementById('scroll-top');
+    if (window.scrollY > 300) {
+        btn.classList.add('show');
+    } else {
+        btn.classList.remove('show');
+    }
+});
+
+// Scroll suave para o topo
+btn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
