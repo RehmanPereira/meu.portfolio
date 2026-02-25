@@ -417,11 +417,13 @@ function updateCounters() {
     const webCount = projects.filter(p => p.category === 'web').length;
     const mobileCount = projects.filter(p => p.category === 'mobile').length;
     const designCount = projects.filter(p => p.category === 'design').length;
+    const presentationCount = projects.filter(p => p.category === 'presentation').length;
     
     document.querySelector('[data-category="all"] .count').textContent = allCount;
     document.querySelector('[data-category="web"] .count').textContent = webCount;
     document.querySelector('[data-category="mobile"] .count').textContent = mobileCount;
     document.querySelector('[data-category="design"] .count').textContent = designCount;
+    document.querySelector('[data-category="presentation"] .count').textContent = presentationCount;
 }
 
 // Inicializar ao carregar página
