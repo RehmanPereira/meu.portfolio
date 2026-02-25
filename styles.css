@@ -716,28 +716,27 @@ footer {
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
+
   border-right: .15em solid red;
 
-  --duracao: 2.5s;
-  --passos: 50;
+  /* Ajusta ESTES 3 valores */
+  --duracao: 2.5s;      /* duração da escrita */
+  --passos: 40;         /* nº de “letras” (aprox. do teu texto) */
+  --piscar: 0.7s;       /* velocidade do cursor */
 
   animation:
     typing var(--duracao) steps(var(--passos), end) forwards,
-    blink-caret .7s step-end infinite,
     caret-hide 0.01s linear forwards;
-  animation-delay: 0s, 0s, var(--duracao);
+  animation-delay: 0s, var(--duracao); /* esconde cursor NO FIM */
 }
 
+/* em vez de width/ch, usamos max-width grande e revelamos */
 @keyframes typing{
   from { max-width: 0; }
   to   { max-width: 9999px; }
 }
 
-@keyframes blink-caret{
-  0%,100% { border-right-color: transparent; }
-  50%     { border-right-color: red; }
-}
-
+/* no fim remove mesmo o cursor */
 @keyframes caret-hide{
   to { border-right-color: transparent; }
 }
