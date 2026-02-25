@@ -333,7 +333,7 @@ const projects = [
     {
         id: 7,
         title: 'Segurança no Desenvolvimento de Software',
-        category: 'presentations',
+        category: 'presentation',
         description: 'Apresentação',
         image: 'imagens/segurancads.jpg',
         tags: ['Teach', 'Web', 'Canva'],
