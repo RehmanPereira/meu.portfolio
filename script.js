@@ -340,7 +340,7 @@ const projects = [
         link: 'https://www.canva.com/design/DAGzJtRFPcA/wyoU4RmJ9JIx9N1qhVVfWQ/view?utm_content=DAGzJtRFPcA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5c14e1e449',
         longDescription: 'Apresentação sobre a "Segurança no Desenvolvimento de Software"',
         features: ['Aprendizado', 'Prático', 'Exemplos', 'Dicas de Segurança' ],
-        technologies: ['ChatGpt', 'Canva'],
+        technologies: ['ChatGPT', 'Canva'],
         date: '2026-02'
     },
     {
@@ -365,8 +365,8 @@ const projects = [
         tags: ['Tech', 'Web', 'Canva'],
         link: 'https://www.canva.com/design/DAGljswWMVI/eMyHjhnl0bXN1OQmHXqwpw/view?utm_content=DAGljswWMVI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h178e982ccd',
         longDescription: 'Apresentação sobre os "EDDs"',
-        features: ['Musicas', 'Recomendações' ],
-        technologies: ['Aprendizado', 'Prático'],
+        features: ['Aprendizado', 'Prático'],
+        technologies: ['ChatGPT', 'Canva'],
         date: '2025-4'
     }
 ];
