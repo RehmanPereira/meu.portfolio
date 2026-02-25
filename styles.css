@@ -712,33 +712,28 @@ footer {
 }
 
 .digitando {
-  font-family: 'comic sans', cursive, sans-serif;
-  overflow: hidden;
-  border-right: .15em solid red;
-  white-space: nowrap;
+  font-family: monospace;
+  overflow: hidden; /* Esconde o texto */
+  border-right: .15em solid orange; /* Cursor de digitação */
+  white-space: nowrap; /* Impede que o texto quebre linha */
   margin: 0 auto;
   letter-spacing: .15em;
-
-  /* Ajusta ESTES 3 valores */
-  --duracao: 2.5s;      /* duração da escrita */
-  --passos: 200;         /* nº de “letras” (aprox. do teu texto) */
-  --piscar: 0.7s;       /* velocidade do cursor */
-
+ 
+  /* Animação: largura, duração, passos e loop */
   animation:
-    typing var(--duracao) steps(var(--passos), end) forwards,
-    caret-hide 0.01s linear forwards;
-  animation-delay: 0s, var(--duracao); /* esconde cursor NO FIM */
+    typing 0.5s steps(10, end),
+    blink-caret .75s step-end infinite;
 }
-
-/* Animação do texto */
+ 
+/* Animação para revelar o texto */
 @keyframes typing {
   from { width: 0 }
-  to { width: 10ch; }
+  to { width: 10ch; } /* número aproximado de caracteres */
 }
-
-/* Cursor pisca e termina invisível */
+ 
+/* Animação para o cursor piscar */
 @keyframes blink-caret {
-  0% { border-color: transparent; }
-  50% { border-color: red; }
-  100% { border-color: transparent; }
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+  100% {border-color: transparent;}
 }
