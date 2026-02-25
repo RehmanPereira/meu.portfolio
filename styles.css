@@ -52,20 +52,21 @@ body.dark-mode {
     /* Bordas */
     --border: #79018C55;
 
-    /* Aliases */
+    /* Aliases (seguem as vars acima, mas deixo explícito p/ clareza) */
     --primary: var(--accent);
     --secondary: var(--accent-2);
     --gray: var(--text-secondary);
     --light: var(--bg-secondary);
     --dark: var(--text-primary);
 
+    /* Footer no dark: fundo roxo escuro, texto branco */
     --footer-bg: var(--bg-secondary);
     --footer-text: #ffffff;
 }
 
 /* ===== BASE STYLES ===== */
 body {
-    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.6;
     color: var(--text-primary);
     background: var(--bg-primary);
@@ -184,6 +185,7 @@ section h2 {
     transition: opacity 0.3s ease;
 }
 
+/* Mostrar sol em modo claro, lua em modo escuro */
 body:not(.dark-mode) .icon-dark {
     opacity: 0;
 }
@@ -230,7 +232,7 @@ footer {
 .clock {
     font-size: 3em;
     font-weight: bold;
-    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    font-family: 'Courier New', monospace;
     background: var(--bg-secondary);
     padding: 1.5rem 3rem;
     border-radius: 15px;
