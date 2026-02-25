@@ -329,6 +329,19 @@ const projects = [
         features: ['Logo principal', 'Variações', 'Manual de marca', 'Mockups'],
         technologies: ['Adobe Illustrator', 'Photoshop', 'InDesign'],
         date: '2024-09'
+    },
+    {
+        id: 7,
+        title: 'Segurança no Desenvolvimento de Software',
+        category: 'presentations',
+        description: 'Apresentação',
+        image: 'imagens/segurancads.jpg',
+        tags: ['Teach', 'Web', 'Canva'],
+        link: 'https://www.canva.com/design/DAGzJtRFPcA/CkXSRLlC0Lz5DYrNA0H6Rw/edit?utm_content=DAGzJtRFPcA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton',
+        longDescription: 'Apresentação sobre a "Segurança no Desenvolvimento de Software"',
+        features: ['I dont know'],
+        technologies: ['ChatGpt', 'Canva'],
+        date: '2026-02'
     }
 ];
 
