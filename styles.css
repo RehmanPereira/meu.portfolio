@@ -50,7 +50,7 @@ body.dark-mode {
     --accent-2: #6A4EA6;
  
     /* Bordas */
-    --border: #79018C55;
+    --border: #281259;
  
     /* Aliases (seguem as vars acima, mas deixo explícito p/ clareza) */
     --primary: var(--accent);
