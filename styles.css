@@ -711,13 +711,13 @@ footer {
     75% { transform: translateX(10px); }
 }
 
-.digitando{
+.digitando {
   font-family: 'comic sans', cursive, sans-serif;
-  display: inline-block;
-  white-space: nowrap;
   overflow: hidden;
-
   border-right: .15em solid red;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: .15em;
 
   /* Ajusta ESTES 3 valores */
   --duracao: 2.5s;      /* duração da escrita */
@@ -730,13 +730,15 @@ footer {
   animation-delay: 0s, var(--duracao); /* esconde cursor NO FIM */
 }
 
-/* em vez de width/ch, usamos max-width grande e revelamos */
-@keyframes typing{
-  from { max-width: 0; }
-  to   { max-width: 9999px; }
+/* Animação do texto */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 10ch; }
 }
 
-/* no fim remove mesmo o cursor */
-@keyframes caret-hide{
-  to { border-right-color: transparent; }
+/* Cursor pisca e termina invisível */
+@keyframes blink-caret {
+  0% { border-color: transparent; }
+  50% { border-color: red; }
+  100% { border-color: transparent; }
 }
