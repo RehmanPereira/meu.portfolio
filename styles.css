@@ -721,7 +721,7 @@ footer {
 
   /* Ajusta ESTES 3 valores */
   --duracao: 2.5s;      /* duração da escrita */
-  --passos: 60;         /* nº de “letras” (aprox. do teu texto) */
+  --passos: 200;         /* nº de “letras” (aprox. do teu texto) */
   --piscar: 0.7s;       /* velocidade do cursor */
 
   animation:
