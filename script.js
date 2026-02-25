@@ -339,7 +339,7 @@ const projects = [
         tags: ['Teach', 'Web', 'Canva'],
         link: 'https://www.canva.com/design/DAGzJtRFPcA/CkXSRLlC0Lz5DYrNA0H6Rw/edit?utm_content=DAGzJtRFPcA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton',
         longDescription: 'Apresentação sobre a "Segurança no Desenvolvimento de Software"',
-        features: ['I dont know'],
+        features: ['Aprendizado', 'Prático', 'Exemplos', 'Dicas de Segurança' ],
         technologies: ['ChatGpt', 'Canva'],
         date: '2026-02'
     }
