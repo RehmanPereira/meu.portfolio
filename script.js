@@ -763,3 +763,104 @@ btn.addEventListener('click', () => {
         behavior: 'smooth'
     });
 });
+
+// ===== VALIDAÇÃO DO FORMULÁRIO =====
+
+// Regras de validação
+const validationRules = {
+    name: {
+        required: true,
+        minLength: 3,
+        pattern: /^[a-zA-ZÀ-ÿ\s]+$/,
+        errorMessages: {
+            required: 'Por favor, introduz o teu nome',
+            minLength: 'O nome deve ter pelo menos 3 caracteres',
+            pattern: 'O nome só pode conter letras'
+        }
+    },
+    email: {
+        required: true,
+        pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        errorMessages: {
+            required: 'Por favor, introduz o teu email',
+            pattern: 'Por favor, introduz um email válido'
+        }
+    },
+    subject: {
+        required: true,
+        errorMessages: {
+            required: 'Por favor, seleciona um assunto'
+        }
+    },
+    message: {
+        required: true,
+        minLength: 10,
+        maxLength: 500,
+        errorMessages: {
+            required: 'Por favor, escreve uma mensagem',
+            minLength: 'A mensagem deve ter pelo menos 10 caracteres',
+            maxLength: 'A mensagem não pode ter mais de 500 caracteres'
+        }
+    }
+};
+
+// Validar campo individual
+function validateField(fieldName, value) {
+    const rules = validationRules[fieldName];
+    
+    // Required
+    if (rules.required && !value.trim()) {
+        return {
+            valid: false,
+            message: rules.errorMessages.required
+        };
+    }
+    
+    // Min Length
+    if (rules.minLength && value.trim().length < rules.minLength) {
+        return {
+            valid: false,
+            message: rules.errorMessages.minLength
+        };
+    }
+    
+    // Max Length
+    if (rules.maxLength && value.trim().length > rules.maxLength) {
+        return {
+            valid: false,
+            message: rules.errorMessages.maxLength
+        };
+    }
+    
+    // Pattern (RegEx)
+    if (rules.pattern && !rules.pattern.test(value)) {
+        return {
+            valid: false,
+            message: rules.errorMessages.pattern
+        };
+    }
+    
+    // Válido!
+    return {
+        valid: true,
+        message: ''
+    };
+}
+
+// Mostrar feedback visual
+function showFieldFeedback(fieldName, isValid, message = '') {
+    const formGroup = document.getElementById(fieldName).closest('.form-group');
+    const errorElement = formGroup.querySelector('.error-message');
+    
+    // Remover estados anteriores
+    formGroup.classList.remove('valid', 'invalid');
+    
+    // Adicionar novo estado
+    if (isValid) {
+        formGroup.classList.add('valid');
+        errorElement.textContent = '';
+    } else {
+        formGroup.classList.add('invalid');
+        errorElement.textContent = message;
+    }
+}
