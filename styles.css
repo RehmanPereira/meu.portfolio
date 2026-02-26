@@ -751,3 +751,12 @@ footer {
   0%, 100% { border-color: transparent; }
   50%      { border-color: red; }
 }
+
+.hero-center{
+  min-height: 60vh;            /* ajusta para o “como antes” */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     /* centra verticalmente */
+  align-items: center;         /* centra horizontalmente */
+  text-align: center;          /* centra o texto */
+}
