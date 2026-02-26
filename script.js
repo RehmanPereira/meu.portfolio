@@ -43,6 +43,29 @@ function loadSavedTheme() {
 // 4. Executar quando página carrega
 document.addEventListener('DOMContentLoaded', () => {
     loadSavedTheme();
+    startClock();
+    loadClockFormat();
+    startClock();
+    initVisitCounter();
+    renderProjects(projects);
+    console.log('✅ Projetos renderizados!');
+    renderProjects(projects);
+    setupFilterListeners();  // ADICIONAR ESTA LINHA
+    console.log('✅ Filtros configurados!');
+    renderProjects(projects);
+    setupFilterListeners();
+    setupModalListeners();  // ADICIONAR ESTA LINHA
+    console.log('✅ Modal configurado!');
+    renderProjects(projects);
+    setupFilterListeners();
+    setupModalListeners();
+    setupSearchListener();  // ADICIONAR ESTA LINHA
+    console.log('✅ Pesquisa configurada!');
+    setupFormValidation();
+    console.log('✅ Validação configurada');
+    setupFormValidation();
+    setupCharCounter();
+    console.log('✅ Contador de caracteres ativo');
 });
 
 // ===== RELÓGIO DIGITAL =====
@@ -89,10 +112,7 @@ function startClock() {
     console.log('⏰ Relógio iniciado!');
 }
 
-// 4. Iniciar quando página carrega
-document.addEventListener('DOMContentLoaded', () => {
-    startClock();
-});
+
 
 // 5. Função para alternar formato
 function toggleFormat() {
@@ -121,11 +141,6 @@ function loadClockFormat() {
     }
 }
 
-// Adicionar ao DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-    loadClockFormat();
-    startClock();
-});
 
 // ===== CONTADOR DE VISITAS =====
 
@@ -216,11 +231,6 @@ function initVisitCounter() {
     console.log('📊 Contador de visitas inicializado!');
 }
 
-// 7. Executar quando página carrega
-document.addEventListener('DOMContentLoaded', () => {
-    initVisitCounter();
-    // ... outras inicializações
-});
 
 // 8. Função para resetar contador
 function resetVisitCounter() {
@@ -439,11 +449,6 @@ function updateCounters() {
     document.querySelector('[data-category="presentation"] .count').textContent = presentationCount;
 }
 
-// Inicializar ao carregar página
-document.addEventListener('DOMContentLoaded', () => {
-    renderProjects(projects);
-    console.log('✅ Projetos renderizados!');
-});
 
 // ===== SISTEMA DE FILTROS =====
 
@@ -487,12 +492,7 @@ function setupFilterListeners() {
     });
 }
 
-// Adicionar ao DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-    renderProjects(projects);
-    setupFilterListeners();  // ADICIONAR ESTA LINHA
-    console.log('✅ Filtros configurados!');
-});
+
 
 // Versão com animação de saída
 function renderProjects(projectsToRender) {
@@ -622,13 +622,6 @@ function setupModalListeners() {
     });
 }
 
-// Adicionar ao DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-    renderProjects(projects);
-    setupFilterListeners();
-    setupModalListeners();  // ADICIONAR ESTA LINHA
-    console.log('✅ Modal configurado!');
-});
 
 // ===== SISTEMA DE PESQUISA =====
 
@@ -686,14 +679,6 @@ function setupSearchListener() {
     });
 }
 
-// Adicionar ao DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-    renderProjects(projects);
-    setupFilterListeners();
-    setupModalListeners();
-    setupSearchListener();  // ADICIONAR ESTA LINHA
-    console.log('✅ Pesquisa configurada!');
-});
 
 // ===== DEBOUNCE PARA PESQUISA =====
 
@@ -921,11 +906,6 @@ function updateSubmitButton() {
     submitBtn.disabled = !isValid;
 }
 
-// Inicializar
-document.addEventListener('DOMContentLoaded', () => {
-    setupFormValidation();
-    console.log('✅ Validação configurada');
-});
 
 // ===== CONTADOR DE CARACTERES =====
 
@@ -953,10 +933,3 @@ function setupCharCounter() {
         }
     });
 }
-
-// Adicionar ao DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-    setupFormValidation();
-    setupCharCounter();
-    console.log('✅ Contador de caracteres ativo');
-});
