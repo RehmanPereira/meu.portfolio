@@ -960,3 +960,57 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCharCounter();
     console.log('✅ Contador de caracteres ativo');
 });
+
+// ===== TOAST NOTIFICATIONS =====
+
+function showToast(type, title, message, duration = 3000) {
+    const container = document.getElementById('toast-container');
+    
+    // Ícones por tipo
+    const icons = {
+        success: '✅',
+        error: '❌',
+        warning: '⚠️',
+        info: 'ℹ️'
+    };
+    
+    // Criar toast
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `
+        
+${icons[type]}
+
+        
+
+            
+${title}
+
+            
+${message}
+
+        
+
+        ×
+    `;
+    
+    // Adicionar ao container
+    container.appendChild(toast);
+    
+    // Close button
+    const closeBtn = toast.querySelector('.toast-close');
+    closeBtn.addEventListener('click', () => {
+        toast.style.animation = 'fadeOut 0.4s ease forwards';
+        setTimeout(() => toast.remove(), 400);
+    });
+    
+    // Auto-remove após duration
+    setTimeout(() => {
+        if (toast.parentElement) {
+            toast.style.animation = 'fadeOut 0.4s ease forwards';
+            setTimeout(() => toast.remove(), 400);
+        }
+    }, duration);
+    
+    console.log(`Toast ${type}: ${title}`);
+}
