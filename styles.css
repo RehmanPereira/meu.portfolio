@@ -718,7 +718,8 @@ footer {
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
-  border-right: .15em solid red;
+  border-right: .15em solid #F9F9ED;
+  color:#7E5A9B
 }
 
 /* Frase 1: "Olá! Sou o Rehman 👋"  -> 19 chars */
@@ -750,7 +751,7 @@ footer {
 /* Cursor pisca e termina invisível */
 @keyframes blink-caret{
   0%, 100% { border-color: transparent; }
-  50%      { border-color: red; }
+  50%      { border-color: #F9F9ED; }
 }
 
 
