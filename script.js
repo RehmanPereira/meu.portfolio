@@ -750,7 +750,7 @@ btn.addEventListener('click', () => {
 });
 
 // ===== VALIDAÇÃO DO FORMULÁRIO =====
-
+ 
 // Regras de validação
 const validationRules = {
     name: {
@@ -788,11 +788,11 @@ const validationRules = {
         }
     }
 };
-
+ 
 // Validar campo individual
 function validateField(fieldName, value) {
     const rules = validationRules[fieldName];
-    
+   
     // Required
     if (rules.required && !value.trim()) {
         return {
@@ -800,7 +800,7 @@ function validateField(fieldName, value) {
             message: rules.errorMessages.required
         };
     }
-    
+   
     // Min Length
     if (rules.minLength && value.trim().length < rules.minLength) {
         return {
@@ -808,7 +808,7 @@ function validateField(fieldName, value) {
             message: rules.errorMessages.minLength
         };
     }
-    
+   
     // Max Length
     if (rules.maxLength && value.trim().length > rules.maxLength) {
         return {
@@ -816,7 +816,7 @@ function validateField(fieldName, value) {
             message: rules.errorMessages.maxLength
         };
     }
-    
+   
     // Pattern (RegEx)
     if (rules.pattern && !rules.pattern.test(value)) {
         return {
@@ -824,22 +824,22 @@ function validateField(fieldName, value) {
             message: rules.errorMessages.pattern
         };
     }
-    
+   
     // Válido!
     return {
         valid: true,
         message: ''
     };
 }
-
+ 
 // Mostrar feedback visual
 function showFieldFeedback(fieldName, isValid, message = '') {
     const formGroup = document.getElementById(fieldName).closest('.form-group');
     const errorElement = formGroup.querySelector('.error-message');
-    
+   
     // Remover estados anteriores
     formGroup.classList.remove('valid', 'invalid');
-    
+   
     // Adicionar novo estado
     if (isValid) {
         formGroup.classList.add('valid');
@@ -849,7 +849,7 @@ function showFieldFeedback(fieldName, isValid, message = '') {
         errorElement.textContent = message;
     }
 }
-
+ 
 // ===== EVENT LISTENERS =====
 
 function setupFormValidation() {
