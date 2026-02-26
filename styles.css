@@ -727,7 +727,7 @@ footer {
   animation:
     typing1 1.5s steps(19, end) forwards,
     blink-caret 1.5s step-end forwards;
-  color:#351C59;
+  color:#6A4EA6;
 }
 
 @keyframes typing1{
