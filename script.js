@@ -992,7 +992,7 @@ ${message}
         
 
         ×
-    `;
+     `;
     
     // Adicionar ao container
     container.appendChild(toast);
@@ -1014,3 +1014,67 @@ ${message}
     
     console.log(`Toast ${type}: ${title}`);
 }
+
+// ===== PROCESSAR SUBMIT =====
+
+function setupFormSubmit() {
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Validar form final
+        if (!validateForm()) {
+            showToast('error', 'Erro!', 'Por favor, corrige os erros no formulário');
+            return;
+        }
+        
+        // Desativar botão e mostrar loading
+        submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
+        
+        // Simular envio (depois vamos guardar em localStorage)
+        try {
+            // Simular delay de rede
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Sucesso!
+            showToast(
+                'success',
+                'Mensagem Enviada!',
+                'Obrigado pelo contacto. Respondo em breve!'
+            );
+            
+            // Limpar formulário
+            form.reset();
+            
+            // Remover estados de validação
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('valid', 'invalid');
+            });
+            
+            // Resetar contador
+            document.getElementById('char-count').textContent = '0';
+            
+        } catch (error) {
+            showToast(
+                'error',
+                'Erro ao Enviar',
+                'Ocorreu um erro. Tenta novamente.'
+            );
+        } finally {
+            // Reativar botão e remover loading
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('loading');
+        }
+    });
+}
+
+// Adicionar ao DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    setupFormValidation();
+    setupCharCounter();
+    setupFormSubmit();
+    console.log('✅ Form submit configurado');
+});
