@@ -926,3 +926,37 @@ document.addEventListener('DOMContentLoaded', () => {
     setupFormValidation();
     console.log('✅ Validação configurada');
 });
+
+// ===== CONTADOR DE CARACTERES =====
+
+function setupCharCounter() {
+    const messageField = document.getElementById('message');
+    const charCount = document.getElementById('char-count');
+    const counter = document.querySelector('.char-counter');
+    const maxLength = 500;
+    
+    messageField.addEventListener('input', () => {
+        const length = messageField.value.length;
+        charCount.textContent = length;
+        
+        // Remover classes anteriores
+        counter.classList.remove('warning', 'error');
+        
+        // Adicionar warning quando >400 caracteres
+        if (length > 400 && length <= maxLength) {
+            counter.classList.add('warning');
+        }
+        
+        // Adicionar error quando >maxLength
+        if (length > maxLength) {
+            counter.classList.add('error');
+        }
+    });
+}
+
+// Adicionar ao DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    setupFormValidation();
+    setupCharCounter();
+    console.log('✅ Contador de caracteres ativo');
+});
