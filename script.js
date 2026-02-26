@@ -827,6 +827,12 @@ const validationRules = {
 // Validar campo individual
 function validateField(fieldName, value) {
     const rules = validationRules[fieldName];
+    
+    // Safety check - if rules don't exist, return valid
+    if (!rules) {
+        console.warn(`Validation rules not found for field: ${fieldName}`);
+        return { valid: true, message: '' };
+    }
    
     // Required
     if (rules.required && !value.trim()) {
@@ -869,19 +875,42 @@ function validateField(fieldName, value) {
  
 // Mostrar feedback visual
 function showFieldFeedback(fieldName, isValid, message = '') {
-    const formGroup = document.getElementById(fieldName).closest('.form-group');
-    const errorElement = formGroup.querySelector('.error-message');
-   
-    // Remover estados anteriores
-    formGroup.classList.remove('valid', 'invalid');
-   
-    // Adicionar novo estado
-    if (isValid) {
-        formGroup.classList.add('valid');
-        errorElement.textContent = '';
-    } else {
-        formGroup.classList.add('invalid');
-        errorElement.textContent = message;
+    try {
+        const field = document.getElementById(fieldName);
+        
+        if (!field) {
+            console.warn(`Field not found: ${fieldName}`);
+            return;
+        }
+        
+        const formGroup = field.closest('.form-group');
+        
+        if (!formGroup) {
+            console.warn(`Form group not found for field: ${fieldName}`);
+            return;
+        }
+        
+        const errorElement = formGroup.querySelector('.error-message');
+       
+        // Remover estados anteriores
+        formGroup.classList.remove('valid', 'invalid');
+       
+        // Adicionar novo estado
+        if (isValid) {
+            formGroup.classList.add('valid');
+            if (errorElement) {
+                errorElement.textContent = '';
+            }
+        } else {
+            formGroup.classList.add('invalid');
+            if (errorElement) {
+                errorElement.textContent = message;
+            }
+        }
+        
+        console.log(`[${fieldName}] Validation: ${isValid ? 'VALID ✓' : 'INVALID ✗'} - ${message}`);
+    } catch (error) {
+        console.error(`Error in showFieldFeedback for ${fieldName}:`, error);
     }
 }
  
@@ -892,13 +921,29 @@ const touchedFields = new Set();
 
 function setupFormValidation() {
     const form = document.getElementById('contact-form');
+    
+    if (!form) {
+        console.error('❌ Contact form not found!');
+        return;
+    }
+    
+    console.log('✅ Contact form found, setting up validation listeners...');
+    
     const fields = ['name', 'email', 'subject', 'message'];
     
     // Validar cada campo ao perder foco (blur)
     fields.forEach(fieldName => {
         const field = document.getElementById(fieldName);
         
+        if (!field) {
+            console.warn(`⚠️ Field not found: ${fieldName}`);
+            return;
+        }
+        
+        console.log(`📝 Setting up listeners for: ${fieldName}`);
+        
         field.addEventListener('blur', () => {
+            console.log(`👋 Blur event on ${fieldName}`);
             // Marcar como tocado
             touchedFields.add(fieldName);
             
@@ -920,9 +965,12 @@ function setupFormValidation() {
         });
     });
     
+    console.log('✅ Blur and input listeners setup complete');
+    
     // Validar form ao submeter
     form.addEventListener('submit', (e) => {
         e.preventDefault();
+        console.log('📤 Form submit attempt');
         
         // Marcar todos os campos como tocados
         fields.forEach(f => touchedFields.add(f));
@@ -1137,4 +1185,191 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCharCounter();
     setupFormSubmit();
     console.log('✅ Form submit configurado');
+});
+
+// ===== GUARDAR MENSAGENS =====
+
+function saveMessage(formData) {
+    // Obter mensagens existentes
+    const messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+    
+    // Criar nova mensagem
+    const message = {
+        id: Date.now(),
+        name: formData.get('name'),
+        email: formData.get('email'),
+        subject: formData.get('subject'),
+        message: formData.get('message'),
+        date: new Date().toISOString(),
+        read: false
+    };
+    
+    // Adicionar ao array
+    messages.unshift(message); // unshift adiciona ao início
+    
+    // Guardar de volta
+    localStorage.setItem('contactMessages', JSON.stringify(messages));
+    
+    console.log('💾 Mensagem guardada:', message);
+    return message;
+}
+
+// Atualizar função de submit
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+        showToast('error', 'Erro!', 'Por favor, corrige os erros');
+        return;
+    }
+    
+    submitBtn.disabled = true;
+    submitBtn.classList.add('loading');
+    
+    try {
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // ADICIONAR: Guardar mensagem
+        const formData = new FormData(form);
+        saveMessage(formData);
+        
+        showToast(
+            'success',
+            'Mensagem Enviada!',
+            'Obrigado pelo contacto. Respondo em breve!'
+        );
+        
+        form.reset();
+        // ... resto do código
+        
+    } catch (error) {
+        showToast('error', 'Erro ao Enviar', 'Tenta novamente.');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+    }
+});
+
+// ===== ADMIN VIEW =====
+
+function loadMessages() {
+    const messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+    const messagesList = document.getElementById('messages-list');
+    const noMessages = document.getElementById('no-messages');
+    const totalMessages = document.getElementById('total-messages');
+    const unreadBadge = document.getElementById('unread-badge');
+    
+    // Atualizar contador
+    totalMessages.textContent = messages.length;
+    
+    // Contar não lidas
+    const unreadCount = messages.filter(m => !m.read).length;
+    if (unreadCount > 0) {
+        unreadBadge.textContent = unreadCount;
+        unreadBadge.style.display = 'flex';
+    } else {
+        unreadBadge.style.display = 'none';
+    }
+    
+    // Mostrar/esconder mensagens
+    if (messages.length === 0) {
+        messagesList.style.display = 'none';
+        noMessages.style.display = 'block';
+        return;
+    }
+    
+    messagesList.style.display = 'flex';
+    noMessages.style.display = 'none';
+    
+    // Renderizar mensagens
+    messagesList.innerHTML = messages.map(msg => `
+        
+
+            
+
+                
+
+                    
+${msg.name}
+
+                    
+${msg.email}
+
+
+                
+
+                
+
+                    
+${new Date(msg.date).toLocaleDateString('pt-PT')}
+
+                    
+${new Date(msg.date).toLocaleTimeString('pt-PT')}
+
+                
+
+            
+
+            ${msg.subject}
+            
+${msg.message}
+
+            
+
+                
+                    🗑️ Eliminar
+                
+            
+
+        
+
+    `).join('');
+}
+
+function deleteMessage(id) {
+    if (!confirm('Eliminar esta mensagem?')) return;
+    
+    let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+    messages = messages.filter(m => m.id !== id);
+    localStorage.setItem('contactMessages', JSON.stringify(messages));
+    
+    loadMessages();
+    showToast('success', 'Eliminada!', 'Mensagem removida com sucesso');
+}
+
+function clearAllMessages() {
+    if (!confirm('Eliminar TODAS as mensagens? Esta ação é irreversível!')) return;
+    
+    localStorage.removeItem('contactMessages');
+    loadMessages();
+    showToast('success', 'Limpo!', 'Todas as mensagens foram removidas');
+}
+
+// Toggle admin view
+function setupAdminToggle() {
+    const toggleBtn = document.getElementById('toggle-admin');
+    const adminSection = document.getElementById('admin-messages');
+    let isVisible = false;
+    
+    toggleBtn.addEventListener('click', () => {
+        isVisible = !isVisible;
+        adminSection.style.display = isVisible ? 'block' : 'none';
+        
+        if (isVisible) {
+            loadMessages();
+            // Scroll para admin
+            adminSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+}
+
+// Limpar todas
+document.getElementById('clear-messages')?.addEventListener('click', clearAllMessages);
+
+// Inicializar
+document.addEventListener('DOMContentLoaded', () => {
+    // ... código anterior
+    setupAdminToggle();
+    loadMessages(); // Carregar contador inicial
+    console.log('✅ Admin view configurada');
 });
