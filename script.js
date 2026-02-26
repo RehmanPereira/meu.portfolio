@@ -864,3 +864,65 @@ function showFieldFeedback(fieldName, isValid, message = '') {
         errorElement.textContent = message;
     }
 }
+
+// ===== EVENT LISTENERS =====
+
+function setupFormValidation() {
+    const form = document.getElementById('contact-form');
+    const fields = ['name', 'email', 'subject', 'message'];
+    
+    // Validar cada campo ao perder foco (blur)
+    fields.forEach(fieldName => {
+        const field = document.getElementById(fieldName);
+        
+        field.addEventListener('blur', () => {
+            const validation = validateField(fieldName, field.value);
+            showFieldFeedback(fieldName, validation.valid, validation.message);
+            updateSubmitButton();
+        });
+        
+        // Validar enquanto escreve (para limpar erros)
+        field.addEventListener('input', () => {
+            // Só valida se já tinha erro
+            const formGroup = field.closest('.form-group');
+            if (formGroup.classList.contains('invalid')) {
+                const validation = validateField(fieldName, field.value);
+                showFieldFeedback(fieldName, validation.valid, validation.message);
+                updateSubmitButton();
+            }
+        });
+    });
+}
+
+// Validar form inteiro
+function validateForm() {
+    const fields = ['name', 'email', 'subject', 'message'];
+    let isFormValid = true;
+    
+    fields.forEach(fieldName => {
+        const field = document.getElementById(fieldName);
+        const validation = validateField(fieldName, field.value);
+        
+        showFieldFeedback(fieldName, validation.valid, validation.message);
+        
+        if (!validation.valid) {
+            isFormValid = false;
+        }
+    });
+    
+    return isFormValid;
+}
+
+// Atualizar estado do botão submit
+function updateSubmitButton() {
+    const submitBtn = document.getElementById('submit-btn');
+    const isValid = validateForm();
+    
+    submitBtn.disabled = !isValid;
+}
+
+// Inicializar
+document.addEventListener('DOMContentLoaded', () => {
+    setupFormValidation();
+    console.log('✅ Validação configurada');
+});
