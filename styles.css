@@ -849,6 +849,16 @@ footer {
     font-size: 1.2em;
     opacity: 0;
     transition: opacity 0.3s;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-icon::before {
+    display: inline-block;
+    font-weight: bold;
 }
 
 .form-group.valid .input-icon {

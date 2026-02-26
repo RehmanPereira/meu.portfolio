@@ -750,6 +750,41 @@ btn.addEventListener('click', () => {
 });
 
 // ===== VALIDAÇÃO DO FORMULÁRIO =====
+
+// Toast Notification
+function showToast(message, type = 'info') {
+    const toastContainer = document.getElementById('toast-container');
+    
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    
+    const icon = {
+        success: '✓',
+        error: '✕',
+        warning: '⚠',
+        info: 'ℹ'
+    }[type] || 'ℹ';
+    
+    toast.innerHTML = `
+        <span class="toast-icon">${icon}</span>
+        <div class="toast-content">
+            <div class="toast-message">${message}</div>
+        </div>
+        <button class="toast-close">&times;</button>
+    `;
+    
+    toastContainer.appendChild(toast);
+    
+    // Remover após 3 segundos
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+    
+    // Botão close manual
+    toast.querySelector('.toast-close').addEventListener('click', () => {
+        toast.remove();
+    });
+}
  
 // Regras de validação
 const validationRules = {
@@ -852,6 +887,9 @@ function showFieldFeedback(fieldName, isValid, message = '') {
  
 // ===== EVENT LISTENERS =====
 
+// Rastrear campos que foram tocados
+const touchedFields = new Set();
+
 function setupFormValidation() {
     const form = document.getElementById('contact-form');
     const fields = ['name', 'email', 'subject', 'message'];
@@ -861,6 +899,9 @@ function setupFormValidation() {
         const field = document.getElementById(fieldName);
         
         field.addEventListener('blur', () => {
+            // Marcar como tocado
+            touchedFields.add(fieldName);
+            
             const validation = validateField(fieldName, field.value);
             showFieldFeedback(fieldName, validation.valid, validation.message);
             updateSubmitButton();
@@ -868,19 +909,50 @@ function setupFormValidation() {
         
         // Validar enquanto escreve (para limpar erros)
         field.addEventListener('input', () => {
-            // Só valida se já tinha erro
+            // Só validar visualmente se o campo já foi tocado ou tem erro
             const formGroup = field.closest('.form-group');
-            if (formGroup.classList.contains('invalid')) {
+            if (touchedFields.has(fieldName) || formGroup.classList.contains('invalid')) {
                 const validation = validateField(fieldName, field.value);
                 showFieldFeedback(fieldName, validation.valid, validation.message);
-                updateSubmitButton();
             }
+            
+            updateSubmitButton();
         });
+    });
+    
+    // Validar form ao submeter
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Marcar todos os campos como tocados
+        fields.forEach(f => touchedFields.add(f));
+        
+        const isFormValid = validateForm();
+        
+        if (!isFormValid) {
+            // Mostrar notificação de erro
+            showToast('❌ Por favor, preenche todos os campos corretamente', 'error');
+            return;
+        }
+        
+        // Se chegou aqui, form é válido
+        // Aqui você pode enviar os dados (ex: para um servidor)
+        showToast('✅ Mensagem enviada com sucesso!', 'success');
+        form.reset();
+        
+        // Limpar estados de validação e campos tocados
+        fields.forEach(fieldName => {
+            const formGroup = document.getElementById(fieldName).closest('.form-group');
+            formGroup.classList.remove('valid', 'invalid');
+            touchedFields.delete(fieldName);
+        });
+        
+        console.log('📨 Formulário enviado com sucesso!');
     });
 }
 
-// Validar form inteiro
-function validateForm() {
+// Validar form inteiro (só mostra feedback em campos tocados, exceto no submit)
+function validateForm(showAllErrors = false) {
     const fields = ['name', 'email', 'subject', 'message'];
     let isFormValid = true;
     
@@ -888,7 +960,10 @@ function validateForm() {
         const field = document.getElementById(fieldName);
         const validation = validateField(fieldName, field.value);
         
-        showFieldFeedback(fieldName, validation.valid, validation.message);
+        // Mostrar feedback se: foi tocado, tem erro, ou é um submit forçado
+        if (touchedFields.has(fieldName) || showAllErrors) {
+            showFieldFeedback(fieldName, validation.valid, validation.message);
+        }
         
         if (!validation.valid) {
             isFormValid = false;
@@ -898,10 +973,22 @@ function validateForm() {
     return isFormValid;
 }
 
-// Atualizar estado do botão submit
+// Atualizar estado do botão submit (sem mostrar feedback de todos os campos)
 function updateSubmitButton() {
     const submitBtn = document.getElementById('submit-btn');
-    const isValid = validateForm();
+    
+    // Apenas verificar validação sem mostrar feedback em campos não tocados
+    const fields = ['name', 'email', 'subject', 'message'];
+    let isValid = true;
+    
+    fields.forEach(fieldName => {
+        const field = document.getElementById(fieldName);
+        const validation = validateField(fieldName, field.value);
+        
+        if (!validation.valid) {
+            isValid = false;
+        }
+    });
     
     submitBtn.disabled = !isValid;
 }
@@ -933,3 +1020,121 @@ function setupCharCounter() {
         }
     });
 }
+
+// ===== TOAST NOTIFICATIONS =====
+
+function showToast(type, title, message, duration = 3000) {
+    const container = document.getElementById('toast-container');
+    
+    // Ícones por tipo
+    const icons = {
+        success: '✅',
+        error: '❌',
+        warning: '⚠️',
+        info: 'ℹ️'
+    };
+    
+    // Criar toast
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `
+        
+${icons[type]}
+
+        
+
+            
+${title}
+
+            
+${message}
+
+        
+
+        ×
+    `;
+    
+    // Adicionar ao container
+    container.appendChild(toast);
+    
+    // Close button
+    const closeBtn = toast.querySelector('.toast-close');
+    closeBtn.addEventListener('click', () => {
+        toast.style.animation = 'fadeOut 0.4s ease forwards';
+        setTimeout(() => toast.remove(), 400);
+    });
+    
+    // Auto-remove após duration
+    setTimeout(() => {
+        if (toast.parentElement) {
+            toast.style.animation = 'fadeOut 0.4s ease forwards';
+            setTimeout(() => toast.remove(), 400);
+        }
+    }, duration);
+    
+    console.log(`Toast ${type}: ${title}`);
+}
+
+// ===== PROCESSAR SUBMIT =====
+
+function setupFormSubmit() {
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Validar form final
+        if (!validateForm()) {
+            showToast('error', 'Erro!', 'Por favor, corrige os erros no formulário');
+            return;
+        }
+        
+        // Desativar botão e mostrar loading
+        submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
+        
+        // Simular envio (depois vamos guardar em localStorage)
+        try {
+            // Simular delay de rede
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Sucesso!
+            showToast(
+                'success',
+                'Mensagem Enviada!',
+                'Obrigado pelo contacto. Respondo em breve!'
+            );
+            
+            // Limpar formulário
+            form.reset();
+            
+            // Remover estados de validação
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('valid', 'invalid');
+            });
+            
+            // Resetar contador
+            document.getElementById('char-count').textContent = '0';
+            
+        } catch (error) {
+            showToast(
+                'error',
+                'Erro ao Enviar',
+                'Ocorreu um erro. Tenta novamente.'
+            );
+        } finally {
+            // Reativar botão e remover loading
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('loading');
+        }
+    });
+}
+
+// Adicionar ao DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    setupFormValidation();
+    setupCharCounter();
+    setupFormSubmit();
+    console.log('✅ Form submit configurado');
+});
