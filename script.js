@@ -188,7 +188,7 @@ const projects = [
         image: 'imagens/Edd.jpg',
         tags: ['Tech', 'Web', 'Canva'],
         link: 'https://www.canva.com/design/DAGljswWMVI/eMyHjhnl0bXN1OQmHXqwpw/view?utm_content=DAGljswWMVI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h178e982ccd',
-        longDescription: 'Apresentação sobre os "EDDs"',
+        longDescription: 'Apresentação sobre os "EDDs" feita por mim e por um colega da turma (Tiago)',
         features: ['Aprendizado', 'Prático'],
         technologies: ['ChatGPT', 'Canva'],
         date: '2025-4'
@@ -823,4 +823,108 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMessages();
 
     console.log('✅ Portfolio totalmente carregado!');
+
+    initButterflyHero();
 });
+
+// Cursor desaparece no fim do typewriter
+setTimeout(() => {
+    document.querySelectorAll('.digitando').forEach(el => {
+        el.style.borderRight = 'none';
+        el.style.animation = el.classList.contains('titulo')
+            ? 'typing1 1.5s steps(19, end) 0.3s forwards'
+            : 'typing2 2.5s steps(41, end) 2s forwards';
+    });
+}, 4700); // 2s delay + 2.5s typing do subtítulo = 4.5s + margem
+
+// ===== ANIMAÇÃO DE BORBOLETA NO HERO (extra, para dar um toque especial) =====/
+
+function initButterflyHero() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    const positions = [
+        { left: '4%',  top: '8%'  },
+        { left: '74%', top: '6%'  },
+        { left: '82%', top: '58%' },
+        { left: '3%',  top: '60%' },
+        { left: '58%', top: '74%' },
+        { left: '24%', top: '10%' },
+    ];
+
+    const moves = [
+        { x1: '25px',  y1: '-20px', x2: '45px',  y2: '5px'   },
+        { x1: '-20px', y1: '-25px', x2: '10px',  y2: '-40px'  },
+        { x1: '30px',  y1: '-18px', x2: '-12px', y2: '-28px'  },
+        { x1: '-28px', y1: '-15px', x2: '18px',  y2: '-32px'  },
+        { x1: '20px',  y1: '-28px', x2: '-15px', y2: '-10px'  },
+        { x1: '-15px', y1: '-22px', x2: '28px',  y2: '-8px'   },
+    ];
+
+    positions.forEach((pos, i) => {
+        const m = moves[i];
+        const scale   = 0.7 + Math.random() * 0.5;
+        const duration = (4.5 + i * 1.2).toFixed(1);
+        const delay   = (i * 0.7).toFixed(1);
+        const flapDur = (0.35 + Math.random() * 0.2).toFixed(2);
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'hero-butterfly';
+        wrapper.style.cssText = `position:absolute;left:${pos.left};top:${pos.top};z-index:1;--sx1:${m.x1};--sy1:${m.y1};--sx2:${m.x2};--sy2:${m.y2};animation:svgfly ${duration}s ease-in-out ${delay}s infinite;`;
+
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width',   Math.round(50 * scale));
+        svg.setAttribute('height',  Math.round(40 * scale));
+        svg.setAttribute('viewBox', '0 0 50 40');
+        svg.classList.add('bf-svg');
+        svg.style.animation = `svgflap ${flapDur}s ease-in-out infinite alternate`;
+        svg.innerHTML = `
+            <path d="M25,20 Q10,5 2,8 Q0,15 8,20 Q0,25 2,32 Q10,35 25,20Z" class="bf-wing" opacity="0.9"/>
+            <path d="M25,20 Q40,5 48,8 Q50,15 42,20 Q50,25 48,32 Q40,35 25,20Z" class="bf-wing" opacity="0.9"/>
+            <ellipse cx="25" cy="20" rx="2" ry="10" class="bf-body"/>
+        `;
+        wrapper.appendChild(svg);
+        hero.appendChild(wrapper);
+    });
+
+    // Árvores silhueta nos cantos
+    [
+        { left: '0%',  w: 60, h: 130 },
+        { left: '4%',  w: 45, h: 100 },
+        { left: '8%',  w: 35, h: 80  },
+        { right: '0%', w: 65, h: 140 },
+        { right: '4%', w: 48, h: 108 },
+        { right: '8%', w: 36, h: 82  },
+    ].forEach(t => {
+        const tree = document.createElement('div');
+        const half = t.w / 2;
+        const pos  = t.left !== undefined ? `left:${t.left}` : `right:${t.right}`;
+        tree.style.cssText = `position:absolute;bottom:0;${pos};width:0;height:0;border-left:${half}px solid transparent;border-right:${half}px solid transparent;border-bottom:${t.h}px solid rgba(0,0,0,0.22);z-index:1;`;
+        hero.appendChild(tree);
+    });
+
+    // Partículas de brilho
+    for (let i = 0; i < 18; i++) {
+        const p = document.createElement('div');
+        const size = Math.random() * 5 + 3;
+        p.style.cssText = `position:absolute;width:${size}px;height:${size}px;border-radius:50%;left:${Math.random()*95}%;top:${Math.random()*85}%;animation:particleDrift ${2+Math.random()*3}s ease-in-out ${Math.random()*3}s infinite;--pdx:${Math.random()*30-15}px;--pdy:${Math.random()*30-15}px;z-index:1;`;
+        hero.appendChild(p);
+    }
+
+    updateButterflyColors();
+    const themeBtn = document.getElementById('theme-toggle');
+    if (themeBtn) themeBtn.addEventListener('click', () => setTimeout(updateButterflyColors, 50));
+}
+
+function updateButterflyColors() {
+    const isDark     = document.body.classList.contains('dark-mode');
+    const wingColor  = isDark ? 'rgba(220,160,255,0.9)' : '#1a0030';
+    const bodyColor  = isDark ? '#ffffff'                : '#0d0018';
+    const glowFilter = isDark ? 'drop-shadow(0 0 5px #c070ff)' : 'none';
+    const partColor  = isDark ? 'rgba(200,150,255,0.25)' : 'rgba(80,0,120,0.2)';
+
+    document.querySelectorAll('.bf-wing').forEach(el => el.setAttribute('fill', wingColor));
+    document.querySelectorAll('.bf-body').forEach(el => el.setAttribute('fill', bodyColor));
+    document.querySelectorAll('.bf-svg').forEach(el  => el.style.filter = glowFilter);
+    document.querySelectorAll('.hero-particle').forEach(el => el.style.background = partColor);
+}
