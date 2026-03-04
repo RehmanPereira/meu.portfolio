@@ -1034,7 +1034,7 @@ async function fetchGitHubUserData() {
 
 // ===== WEATHER WIDGET =====
 
-const OPENWEATHER_API_KEY = '00b57ea0d89eb13566b4f0f1cb5e00e3'; // ALTERAR!
+const OPENWEATHER_API_KEY = '00b57ea0d89eb13566b4f0f1cb5e00e3';
 const DEFAULT_CITY = 'Lisbon'; // Cidade padrão se geolocalização falhar
 
 // Mapeamento de códigos para emojis
