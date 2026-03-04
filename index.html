@@ -28,7 +28,7 @@
     <section class="hero">
     <h1 class="digitando titulo">Olá! Sou o Rehman 👋</h1>
     <p class="digitando subtitulo">Desenvolvedor Web | Estudante | Criativo</p>
-</section>
+    </section>
 
     <!-- SOBRE MIM -->
     <section id="about" class="about">
@@ -40,6 +40,14 @@
             <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
         </div>
         <button id="format-toggle" class="format-toggle">12h/24h</button>
+
+        <!-- Skeleton para GitHub Stats -->
+        <div class="skeleton-stat-card">
+            <div class="skeleton-icon"></div>
+            <div class="skeleton-value"></div>
+            <div class="skeleton-label"></div>
+        </div>
+
             <!-- CONTADOR DE VISITAS -->
         <div class="visit-counter">
         <p>👋 Visitaste esta página <strong id="visit-count">0</strong> vezes</p>
@@ -47,7 +55,7 @@
         <button id="reset-counter" class="reset-btn">🔄 Reset</button>
         </div>
         </div>
-</section>
+    </section>
 
 
 
@@ -96,6 +104,56 @@
         <div id="modal-body">
             <!-- Conteúdo do modal será inserido aqui -->
         </div>
+    </div>
+</section>
+
+
+<section id="github-stats" class="github-stats">
+    <div class="section-header">
+        <h2>🐙 GitHub Stats</h2>
+        <p>Os meus projetos open-source</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">📦</div>
+            <div class="stat-value" id="repos-count">--</div>
+            <div class="stat-label">Repositórios</div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-value" id="stars-count">--</div>
+            <div class="stat-label">Stars Totais</div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-value" id="followers-count">--</div>
+            <div class="stat-label">Followers</div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">🔀</div>
+            <div class="stat-value" id="following-count">--</div>
+            <div class="stat-label">Following</div>
+        </div>
+    </div>
+
+    <!-- Repositórios Populares -->
+    <div class="repos-section">
+        <h3>📌 Repositórios Populares</h3>
+        <div id="repos-grid" class="repos-grid">
+            <!-- Repos serão inseridos aqui -->
+        </div>
+    </div>
+
+    <!-- Link para GitHub -->
+    <div class="github-link">
+        <a href="https://github.com/RehmanPereira" target="_blank" class="btn-github">
+            Ver Todos no GitHub →
+        </a>
     </div>
 </section>
 
@@ -268,11 +326,30 @@
 
 <!-- FOOTER -->
     <footer>
+                <!-- Weather Widget (pode ir no header ou footer) -->
+    <div class="weather-widget" id="weather-widget">
+    <div class="weather-loading">
+        <p>⏳ A carregar meteorologia...</p>
+    </div>
+    
+    <div class="weather-content" style="display: none;">
+        <div class="weather-icon" id="weather-icon">☀️</div>
+        <div class="weather-info">
+            <div class="weather-temp">
+                <span id="temp">--</span>°C
+            </div>
+            <div class="weather-desc" id="weather-desc">--</div>
+            <div class="weather-location" id="weather-location">--</div>
+        </div>
+    </div>
+    
+    <div class="weather-error" style="display: none;">
+        <p>❌ Erro ao carregar meteorologia</p>
+    </div>
+    </div>
         <p>© <span id="year"></span> Rehman. Feito com ❤️ e ☕</p>
     </footer>
     <script src="script.js"></script>
-
-    <!-- Container de Toasts (adicionar antes de </body>) -->
     <div id="toast-container" class="toast-container"></div>
 </body>
 </html>
