@@ -42,7 +42,7 @@ body.dark-mode {
     /* Paleta Dark */
     --bg-primary: #140126;
     --bg-secondary: #351C59;
- 
+    
     /* Texto */
     --text-primary: #A7B2F2;
     --text-secondary: #A7B2F2;
@@ -794,10 +794,10 @@ footer {
 
 /* Form Styling */
 .contact-form {
-    background: white;
+    background: var(--bg-secondary), var(--bg-primary);
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px var(--led-color), 0 0 20px var(--led-color);
 }
 
 .form-group {
@@ -973,10 +973,10 @@ footer {
 
 /* Contact Info */
 .contact-info {
-    background: white;
+    background: var(--bg-secondary), var(--bg-primary);
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px var(--led-color), 0 0 20px var(--led-color);
 }
 
 .contact-info h3 {
