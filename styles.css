@@ -1510,7 +1510,8 @@ footer {
 
 /* Weather Widget */
 .weather-widget {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    
+    background: linear-gradient(135deg, var(--border) 0%, var(--bg-primary) 100%);
     color: white;
     padding: 25px;
     border-radius: 20px;
